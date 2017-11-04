@@ -36,11 +36,6 @@ int main() {
                 max_heap.push(input);
         }
 
-        if(N % 2 && max_heap.size()) {
-            ans += T_a;
-            max_heap.pop();
-        }
-
         while(!max_heap.empty() && !min_heap.empty()) {
             if(max_heap.top() + min_heap.top() < H) {
                 ans += T_d;
