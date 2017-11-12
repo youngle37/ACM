@@ -14,8 +14,6 @@ int main() {
     for(int c = 1; c <= C; ++c) {
         int N, H, T_a, T_d;
         int ans = 0;
-        priority_queue<int> max_heap;
-        priority_queue<int, vector<int>, greater<int>> min_heap;
 
         cin >> N >> H >> T_a >> T_d;
 
@@ -26,15 +24,22 @@ int main() {
             continue;
         }
 
+        vector<int> lower;
+        vector<int> higher;
+        lower.reserve(N);
+        higher.reserve(N);
         int criteria = H % 2 ? H / 2 : H / 2 - 1;
         int input;
         for(int i = 0; i < N; ++i) {
             cin >> input;
             if(input <= criteria)
-                min_heap.push(input);
+                lower.push_back(input);
             else
-                max_heap.push(input);
+                higher.push_back(input);
         }
+
+        priority_queue<int> max_heap(higher.begin(), higher.end());
+        priority_queue<int, vector<int>, greater<int>> min_heap(lower.begin(), lower.end());
 
         while(!max_heap.empty() && !min_heap.empty()) {
             if(max_heap.top() + min_heap.top() < H) {
