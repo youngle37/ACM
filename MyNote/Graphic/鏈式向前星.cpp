@@ -5,7 +5,7 @@
 
 using namespace std;
 
-struct Edge{
+struct Edge {
     int to;
     int w;
     int next;
@@ -14,36 +14,36 @@ struct Edge{
 int cnt_edge = 0;
 int head[N * 2];
 
-void add_edge(int from, int to, int w){
+void add_edge(int from, int to, int w) {
     edge[cnt_edge].to = to;
     edge[cnt_edge].w = w;
     edge[cnt_edge].next = head[from];
     head[from] = cnt_edge++;
 }
 
-int main(){
+int main() {
     _
 
     memset(head, -1, sizeof(head));
 
-    int node_number;
-    cout << "Input node relation number: ";
-    cin >> node_number;
+    int edge_number;
+    cout << "Input edge number: ";
+    cin >> edge_number;
 
-    cout << "Input the node relation and weight: " << '\n';
-    int from , to, w;
-    for(int i=0;i<node_number;++i){
+    cout << "Input edge start, end, weight: " << '\n';
+    int from, to, w;
+    for(int i = 0; i < edge_number; ++i) {
         cin >> from >> to >> w;
         add_edge(from, to, w);
     }
 
 
     int node;
-    while(true){
+    while(true) {
         cout << "Input the node you want to traversal its neighbors:";
         cin >> node;
 
-        for(int i=head[node]; ~i ; i=edge[i].next) // when i != -1 then continue
+        for(int i = head[node]; ~i ; i = edge[i].next) // when i != -1 then continue
             cout << edge[i].to << ' ';
 
         cout << '\n';
