@@ -17,37 +17,45 @@
  */
 #include <iostream>
 #include <vector>
+#include <utility>
+#include <algorithm>
 
 using namespace std;
 
-const int N = 10, W = 20;
-int cost[N], weight[N];
-vector<int> c(W + 1, 0);
-
-void find_best_value(int n, int w) {
-
-    for(int i = 0; i < n; ++i)                  // 窮舉每種物品
-        for(int j = w; j - weight[i] >= 0; --j) // 窮舉每種重量且由後往前
-            c[j] = max(c[j], c[j - weight[i]] + cost[i]);
-
-    cout << c[w] << '\n';
-}
-
-
-void init() {
-    cout << "Input each item cost:" << '\n';
-    for(int i = 0; i < N; ++i)
-        cin >> cost[i];
-
-    cout << "Input each item weight: " << '\n';
-    for(int i = 0; i < N; ++i)
-        cin >> weight[i];
+bool myComp(pair<int,int> i, pair<int,int> j){
+    return i.second < j.second;
 }
 
 int main() {
 
-    init();
-    find_best_value(N, W);
+    int N, W;
+
+    cout << "Number of items： ";
+    cin >> N;
+
+    cout << "Weight of backpack： ";
+    cin >> W;
+
+    vector<pair<int, int>> item;
+    cout << "Input each item's value and weight：\n";
+    for(int i=0;i<N;++i){
+        int v,w;
+        cin >> v >> w;
+        item.push_back(make_pair(v,w));
+    }
+
+    sort(item.begin(), item.end(), myComp);     // 先用weight從小排到大 以利以下的sum優化增加
+
+    int sum = 0;
+    vector<int> c(W+1,0);
+
+    for(int i=0;i<N;++i){
+        for(int j=min(W,sum+item[i].second); j >= item[i].second; --j)  // 每次不需要比完W次 只需min(W, sum)次
+            c[j] = max(c[j], c[j-item[i].second] + item[i].first);      // 因為若可以全放進去，那解就是全放
+        sum += item[i].second;
+    }
+
+    cout << c[min(W, sum)] << '\n';
 
     return 0;
 }
