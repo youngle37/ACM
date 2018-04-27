@@ -49,8 +49,8 @@ void LCS_length(vector<vector<int>> &DP, string &s1, string &s2) {
 
 int main() {
     // 從位置1開始計算 for 實作方便
-    string *s1 = "_2579312";
-    string *s2 = "_35328";
+    string s1 = "_2579312";
+    string s2 = "_35328";
 
     // DP[i][j] 代表 s1前 i 個元素 和 s2前 j 個元素的LCS長度
     vector<vector<int>> DP(s1.size(), vector<int>());

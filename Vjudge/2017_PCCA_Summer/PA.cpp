@@ -1,55 +1,34 @@
 #include <iostream>
 #include <string>
 
-#define _ ios_base::sync_with_stdio(false);cin.tie(0);
-
 using namespace std;
 
 int main(){
-    _
+    string input;
+    bool ans;
+    size_t found;
+    while(cin >> input){
+        ans = false;
 
-    string s;
-    bool AB,BA;
-
-    while(cin >> s){
-        AB = BA = false;
-
-        for(int i=0;i<s.size();++i){
-            if(i != s.size()-1 && s[i] == 'A' && s[i+1] == 'B' && !AB && !BA){
-                AB = true;
-                ++i;
-            }
-            else if(i != s.size()-1 && s[i] == 'B' && s[i+1] == 'A' && !BA && AB){
-                BA = true;
-                ++i;
-            }
+        found = input.find("AB");
+        if(found != string::npos){
+            found = input.find("BA", found+2);
+            if(found != string::npos)
+                ans = true;
         }
 
-        if(AB && BA){
-            cout << "YES" << '\n';
-            continue;
+        found = input.find("BA");
+        if(found != string::npos){
+            found = input.find("AB", found+2);
+            if(found != string::npos)
+                ans = true;
         }
 
-        AB = BA = false;
-
-
-        for(int i=0;i<s.size();++i){
-            if(i != s.size()-1 && s[i] == 'B' && s[i+1] == 'A' && !BA && !AB){
-                BA = true;
-                ++i;
-            }
-            else if(i != s.size()-1 && s[i] == 'A' && s[i+1] == 'B' && !AB && BA){
-                AB = true;
-                ++i;
-            }
-        }
-
-        if(AB && BA)
-            cout << "YES" << '\n';
+        if(ans)
+            cout << "YES\n";
         else
-            cout << "NO" << '\n';
+            cout << "NO\n";
     }
-    
 
     return 0;
 }
