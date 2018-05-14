@@ -26,6 +26,7 @@ int main() {
             s = strtok(NULL, del);
         }
 
+
         vector<int> ans;
         if(num[0] > num[1])
             ans.push_back(0);
@@ -38,7 +39,8 @@ int main() {
         if(num[cnt-1] > num[cnt-2])
             ans.push_back(cnt-1);
 
-        printf("%d", ans[0]);
+        if(ans.size() >= 1)
+            printf("%d", ans[0]);
         for(int i=1;i<ans.size();++i)
             printf(" %d", ans[i]);
 
