@@ -1,10 +1,28 @@
 #include <iostream>
-#include <set>
-#include <utility>
 #include <vector>
+#include <set>
 
-#define pii pair<int,int>
-#define mp(a,b) make_pair(a,b)
+struct Item{
+    int s1;
+    int s2;
+    int pos;
+    Item(){
+        s1 = 0, s2 = 0, pos = 0;
+    }
+    Item(int a,int b,int p){
+        s1 = a;
+        s2 = b;
+        pos = p;
+    }
+
+    bool operator<(const Item& rhs) const{
+        return s1 < rhs.s1 || s2 < rhs.s2;
+    }
+
+    bool operator==(const Item& rhs) const{
+        return s1==rhs.s1 && s2==rhs.s2;
+    }
+};
 
 using namespace std;
 
@@ -20,29 +38,34 @@ int main() {
     while(T--) {
         cin >> P >> Q >> R >> s1 >> s2;
 
-        set<pii> S;
-        S.insert(mp(s1, s2));
+        set<Item> S;
+        Item first(s1, s2, 1);
+        S.insert(first);
 
         vector<int> val;
         val.push_back(s1);
         val.push_back(s2);
 
-        pii temp_pair;
+        Item temp_Item;
         int temp;
         int i = 2;
-        do {
+        set<Item>::iterator it;
+        do{
             temp = F(val[i-2], val[i-1]);
-            val.push_back(temp);
-            temp_pair = mp(val[i-1], temp);
+            temp_Item.s1 = val[i-1];
+            temp_Item.s2 = temp;
+            temp_Item.pos = i;
 
-            if(S.find(temp_pair) != S.end())
+            if(S.find(temp_Item) != S.end()){
+                it = S.find(temp_Item);
+                cout << i - it->pos << '\n';
                 break;
+            }
 
-            S.insert(temp_pair);
+            val.push_back(temp);
+            S.insert(temp_Item);
             i++;
-        } while(1);
-
-        cout << S.size() << '\n';
+        }while(1);
     }
 
     return 0;
