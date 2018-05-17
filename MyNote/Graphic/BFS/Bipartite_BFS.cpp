@@ -31,7 +31,7 @@ bool isBipartite(vector<vector<int>> &G, int n, int i) {
         if(G[now][now] == 1) return false;
 
         for(int i=0;i<n;++i){
-            if(G[now][i] == 1 && color[i] != -1){
+            if(G[now][i] == 1 && color[i] == -1){
                 // color[now] == 0 ? color[i] = 1 : color[i] = 0;
                 color[i] = 1 - color[now];
                 q.push(i);
