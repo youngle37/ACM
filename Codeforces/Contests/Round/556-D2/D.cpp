@@ -1,4 +1,8 @@
 /*
+ * words[0]：Religion 1's description
+ * words[1]：Religion 2's description
+ * words[2]：Religion 3's description
+ *
  * dp[i][j][k]：words[0] 的長度 i 前綴, words[1] 的長度 j 前綴, words[2] 的長度 k 前綴的最小所需 pattern 的前綴長度
  *
  * dp[i][j][k] = min(dp[i-1][j][k]+下個出現 words[0][i-1] 的位置,
