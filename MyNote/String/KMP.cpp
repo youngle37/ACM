@@ -54,7 +54,7 @@ void kmp(string &T, string &P) {
 
 int main() {
     string T = "a";
-    string P = "a";
+    string P = "ababbabab";
 
     kmp(T, P);
 

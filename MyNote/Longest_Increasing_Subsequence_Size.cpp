@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <algorithm>
-#include <stdio.h>
+#include <cstdio>
 
 using namespace std;
 

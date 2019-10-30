@@ -79,7 +79,7 @@ void get_SA(int m) {
     for(int i = n - 1; i >= 0; i--) sa[--c[x[i]]] = i; // 因為是 0-base 所以先減再放
 
     /* Doubling Algorithm */
-    for(int k = 1; k <= n; k << 1) {
+    for(int k = 1; k <= n; k <<= 1) {
         int p = 0;
         for(int i = n - k; i < n; i++) y[p++] = i;
         for(int i = 0; i < n; i++) if (sa[i] >= k) y[p++] = sa[i] - k;
